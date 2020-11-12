@@ -1,0 +1,47 @@
+---
+title: 'Linear Regression Project'
+author: "Luc Barenghien"
+date: "August 20, 2020"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+###Part 1: Making a scatterplot
+```{r}
+setwd("~/Downloads")
+load("ch05q19.rdata")
+X<-ch05q19$owncost
+Y<-ch05q19$ownerocc
+plot(Y, X, main="Scatterplot", xlab="ownerocc", ylab="owncost", pch=19)
+```
+
+###Part 2: Finding the regression equation.
+
+```{r}
+Equation<-lm(Y~X)
+```
+
+So the equation is: $\hat{ownerocc} = -0.01517 \times owncost + 76.00764$.
+
+
+###Part 3: Remaking the scatterplot and adding the regression line.
+
+```{r}
+plot(Y~X)
+abline(Equation)
+```
+
+
+###Part 4: Test to see if the slope is significantly different than 0.
+
+```{r}
+summary(Equation)
+```
+The relevant p-value given in this output is 0.0155, and is significant at the 5% level.  In other words, this data leads us to reject the null hypothesis that the slope of the equation predicting weight from age is 0.  More succintly, the slope of this regression line is significantly different from 0.
+
+###Part 5: Finding the 95% confidence interval for the slope.
+
+```{r}
+confint(Equation,level = 0.95)
+```
